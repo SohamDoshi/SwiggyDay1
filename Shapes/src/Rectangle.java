@@ -16,4 +16,12 @@ public class Rectangle {
 	public int getWidth () {
 		return this.width;
 	}
+	
+	public int getArea() {
+		return this.length * this.width;
+	}
+	
+	public int getCircumfurence() {
+		return 2*(this.length + this.width);
+	}
 }

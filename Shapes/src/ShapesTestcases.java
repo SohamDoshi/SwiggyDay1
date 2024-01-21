@@ -8,14 +8,12 @@ public class ShapesTestcases {
 	@Test
 	public void invaildRectangle () {
 		Rectangle rectangle = new Rectangle(10, 10);
-		
-		assertNotEquals(rectangle.getLength(), rectangle.getWidth());
+		assertEquals(rectangle.getLength(), rectangle.getWidth());
 	}
 	
 	@Test
 	public void vaildRectangle () {
-		Rectangle rectangle = new Rectangle(10, 10);
-		
+		Rectangle rectangle = new Rectangle(20, 10);
 		assertEquals(rectangle.getLength(), rectangle.getWidth());
 	}
 	
@@ -23,14 +21,14 @@ public class ShapesTestcases {
 	@Test
 	public void calculateArea() {
 		Rectangle rectangle = new Rectangle(15, 10);
-		int area = rectangle.getLength() * rectangle.getWidth();
+		int area = rectangle.getArea();
 		assertEquals(150, area);
 	}
 	
 	@Test
 	public void calculateCircumference() {
 		Rectangle rectangle = new Rectangle(12, 8);
-		int circumference = 2 * (rectangle.getLength() + rectangle.getWidth());
+		int circumference = rectangle.getCircumfurence();
 		assertEquals(40, circumference);
 	}
 }
