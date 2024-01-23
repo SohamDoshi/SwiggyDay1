@@ -1,5 +1,6 @@
 package Measurement;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -37,10 +38,34 @@ public class MeasureTest {
 	}
 	
 	@Test
+	public void testAddingTwoDifferentUnits() {
+		try {
+			Measure length = new Measure(500, LengthUnit.M);
+			Measure volume = new Measure(200, VolumeUnit.MILLILITER);
+			Measure result = length.add(volume);
+			fail("Expected IllegalArgumentException, but got result: " + result);
+		} catch (IllegalArgumentException e) {
+			assertEquals("Incompatible units for addition", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void testSubtractKilogramFromTonne() {
 		Measure weigth = new Measure(4, WeightUnit.TONNE);
 		Measure weigth1 = new Measure(200, WeightUnit.KG);
-		Measure resulte = weigth.subtract(weigth1);
-		assertEquals(new Measure(3800, WeightUnit.KG), resulte);
+		Measure result = weigth.subtract(weigth1);
+		assertEquals(new Measure(3800, WeightUnit.KG), result);
+	}
+	
+	@Test
+	public void testSubtractingBigFromSmallUnit() {
+		try {
+			Measure weigth = new Measure(4, WeightUnit.KG);
+			Measure weigth1 = new Measure(8, WeightUnit.KG);
+			Measure result = weigth.subtract(weigth1);
+			fail("Expected IllegalArgumentException, but got result: " + result);
+		} catch (IllegalArgumentException e) {
+			assertEquals("Cannot subtract a bigger unit from a smaller unit", e.getMessage());
+		}
 	}
 }
